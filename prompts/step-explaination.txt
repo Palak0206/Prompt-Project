@@ -1,0 +1,7 @@
+so you want me to get it to make an ai models first ?
+
+i don't get most of these you do and for that you are going to instruct me clearly what to do&#x20;
+
+1. write the prompt step by step for each move (eg if we are starting with making the models and evaluating them then you write the prompt for other ai's what they exactly have to build and step by step not the whole project all togather when one part is completed then i may ask you to either modify or make the prompt better or move to the next step)
+2. Describe the steps for each move eg "making the first ai model " step1 give the prompt to claude step2 run it (and describe exactly where) step3 share what results with you step 4 sharing output to you so you can evaluate the performance step5 tell me what exactly to add in the three folders prompt ,validation and experiments for each shared result &#x20;
+3. i'm going to be using 2 ai and we will be comparing their results and performance for each move chatgpt and claude

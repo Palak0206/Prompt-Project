@@ -1,0 +1,41 @@
+I want you to act as a study timetable generator.
+
+Create a day-wise study timetable for a student preparing for three upcoming examinations.
+
+Student Information:
+
+Subjects:
+1. Mathematics
+   Exam Date: 20 November 2026
+   Difficulty: Hard
+   Preparation Completed: 40%
+
+2. DBMS
+   Exam Date: 22 November 2026
+   Difficulty: Medium
+   Preparation Completed: 60%
+
+3. Operating Systems
+   Exam Date: 25 November 2026
+   Difficulty: Hard
+   Preparation Completed: 30%
+
+Available Study Time:
+4 hours per day.
+
+Timetable Start Date:
+16 November 2026.
+
+Requirements:
+
+Create a timetable covering the preparation period.
+Distribute study hours across the subjects.
+Include revision sessions wherever appropriate.
+
+Present the timetable in a table containing:
+- Date
+- Subject
+- Study task
+- Duration
+
+Also provide a short explanation of your scheduling decisions.

@@ -1,0 +1,15 @@
+Timetable and study plan
+generator
+Students planning
+exam preparation
+Subjects, exam dates and free
+hours → day-wise study plan in a
+table
+Constraint-based
+prompting, structured
+output, constraint
+checking
+
+this is my project which is going to be a prompt engineering project hence i mainily have to prompt different ai's for different requirements
+rn i want to make my readme file 
+write the required content for it also explaining the problem statement and the technical approach thought initially
