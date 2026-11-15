@@ -1,0 +1,57 @@
+I am developing an AI-powered Timetable and Study Plan Generator as a prompt engineering project.
+
+The application will use an LLM API to generate personalized study timetables based on student information.
+
+I need you to act as a senior software architect and analyze the project requirements.
+
+IMPORTANT:
+Do not write any code yet.
+Do not generate an actual study timetable.
+Your task is to produce a technical requirements specification for the application.
+
+PROJECT OBJECTIVE:
+Build a web application where students enter their academic information and receive a personalized, day-wise study timetable.
+
+INITIAL INPUT REQUIREMENTS:
+1. Subject names.
+2. Examination dates for each subject.
+3. Subject difficulty levels.
+4. Preparation percentage for each subject.
+5. Available study hours per day.
+6. Study start date.
+7. Optional student preferences.
+
+EXPECTED APPLICATION OUTPUT:
+A structured day-wise study timetable containing Date, Subject, Specific study task, Duration, Revision sessions and Breaks where appropriate.
+
+TECHNICAL DIRECTION:
+- Python as the main programming language.
+- Flask for the backend.
+- An LLM API for timetable generation.
+- Prompt engineering for dynamically constructing instructions from student inputs.
+- JSON as the expected structured AI response.
+- Python-based validation to check generated timetables against scheduling constraints.
+- HTML, CSS and JavaScript for the frontend.
+
+YOUR TASK:
+Create a detailed technical requirements specification covering:
+1. Functional requirements: What features must the application provide?
+2. Input requirements: What information should students provide? Which fields should be mandatory or optional?
+3. Output requirements: What should the generated timetable contain? Propose an appropriate JSON structure.
+4. Prompt engineering requirements: What information and instructions should be included in the dynamically constructed prompt?
+5. Scheduling constraints: What rules must the generated timetable follow?
+6. Validation requirements: What should Python independently verify? What should happen when the timetable is invalid?
+7. Backend architecture: Identify the main modules and their responsibilities.
+8. API integration: Explain how the backend should communicate with an LLM API and handle failures.
+9. Frontend requirements: Describe the student input form and how the generated timetable should be displayed.
+10. Testing requirements: Suggest test cases for normal inputs, incomplete inputs and conflicting constraints.
+
+IMPORTANT DESIGN CONSIDERATIONS:
+- Do not assume the LLM will always produce correct results.
+- Do not rely on prompt instructions alone to enforce scheduling constraints.
+- Distinguish between LLM-generated decisions and Python-enforced validation.
+- Avoid unnecessary complexity.
+- Keep the architecture modular and suitable for a student-level project.
+
+FORMAT:
+Organize your answer into clearly numbered sections. Explain technical recommendations and justify important design decisions. End with a proposed development sequence. Do not implement anything yet.
