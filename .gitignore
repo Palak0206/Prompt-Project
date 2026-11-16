@@ -1,0 +1,21 @@
+# Virtual environment
+virtual/
+venv/
+.env/
+
+# Environment variables and secrets
+.env
+!.env.example
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Pytest
+.pytest_cache/
+
+# IDE settings
+.vscode/
+
+# Generated files
+outputs/
