@@ -1,0 +1,136 @@
+# Task 2: Input and Output Data Design
+
+I am developing an AI-powered Timetable and Study Plan Generator using Python, Flask, and an LLM API.
+
+The project has completed its initial technical requirements analysis. I now need to finalize the data structures before starting implementation.
+
+Act as a senior backend architect and API designer.
+
+## Important instructions
+- Do not write any application code.
+- Do not generate an actual study timetable.
+- Do not redesign the entire application architecture.
+- Focus only on the input data model and output data model.
+- Explain your decisions and identify potential edge cases.
+- Keep the design practical for a student-level MVP. Avoid unnecessary complexity.
+
+## 1. Application workflow
+
+The intended workflow is:
+
+1. Student enters academic information through a web form.
+2. Flask receives the input.
+3. Python validates and preprocesses the input.
+4. A prompt builder constructs a dynamic prompt using the validated information.
+5. An LLM API generates a timetable in structured JSON.
+6. Python parses and independently validates the LLM response.
+7. Only a valid timetable is displayed to the student.
+
+Python is responsible for objective calculations and enforcing hard constraints. The LLM is responsible for planning decisions, selecting study activities, sequencing tasks, and generating explanations.
+
+## 2. Student input requirements
+
+The student should provide:
+
+### General information
+- Start date of the study plan.
+- Maximum available study hours per day.
+
+### Subject information (one or more subjects)
+Each subject should contain:
+- Subject name.
+- Exam date.
+- Difficulty level (Easy, Medium, Hard).
+- Preparation percentage (0–100).
+- Optional list of syllabus topics.
+
+### Preferences
+Preferences should remain minimal for the MVP. Consider whether any optional preferences are genuinely necessary, rather than adding many fields.
+
+Important decisions:
+- The planning period should be calculated automatically from the start date through the last exam date.
+- Daily available hours represent a maximum limit, not a target that must always be filled.
+- Do not collect exact clock-time availability in the MVP.
+- Do not include unnecessary personal information.
+
+## 3. Timetable output requirements
+
+The LLM should return a structured JSON timetable containing:
+
+- A list of study days.
+- Each day should contain an ordered list of study sessions.
+- Each session should identify the subject, task/activity, session type, and duration in minutes.
+- Breaks should be represented clearly and should not count as study time.
+- The output should support different study activities, such as learning new material, practice, revision, and mock tests.
+
+Do not include exact start and end clock times because the student does not provide clock-time availability.
+
+Avoid fields that Python can reliably calculate itself, such as weekday names and daily total study minutes, unless you can justify including them in the LLM response.
+
+## 4. Important scheduling rules
+
+Please account for these rules while designing the schemas:
+
+1. A subject must not receive a study session on or after its exam date.
+2. Other subjects with later exam dates may still be scheduled on that same date.
+3. No study day may exceed the student's maximum available daily hours.
+4. Session durations must be positive integer values in minutes.
+5. Break durations must be separate from study durations.
+6. Only subjects supplied by the student may be scheduled.
+7. Every date in the planning period should be represented, even if no study session is planned for that date.
+8. If syllabus topics are supplied, the LLM should use them appropriately.
+9. If syllabus topics are not supplied, the LLM may suggest general study activities but must not invent specific textbook chapters or claim knowledge of the student's actual syllabus.
+10. The timetable should include revision where appropriate, without violating exam dates or available study hours.
+
+## 5. Your tasks
+
+### A. Design the student input schema
+Specify:
+- Field names.
+- Data types.
+- Required versus optional fields.
+- Allowed values and ranges.
+- Validation rules.
+- One representative JSON example.
+
+### B. Design the LLM output schema
+Specify:
+- Field names.
+- Data types.
+- Required versus optional fields.
+- Allowed values.
+- Validation rules.
+- One representative JSON example using fictional subjects and dates.
+
+The example must only illustrate the structure. Do not generate a complete study timetable.
+
+### C. Recommend a validation strategy
+Explain which checks should be performed by:
+- Input validation in Python before the API call.
+- Output validation in Python after the API call.
+- The LLM through prompt instructions.
+
+Clearly distinguish hard constraints from soft preferences.
+
+### D. Identify edge cases
+Consider situations such as:
+- Two subjects having the same exam date.
+- An exam date being the same as the plan start date.
+- A student having very few available hours.
+- A subject having 100% preparation.
+- A subject having 0% preparation.
+- No syllabus topics being supplied.
+- A planning period containing days with no available study time.
+- The LLM returning missing, invalid, or unexpected fields.
+- The LLM exceeding the daily study-hour limit.
+
+For each, recommend how the application should handle it.
+
+### E. Final recommendations
+Conclude with:
+1. Your recommended input JSON structure.
+2. Your recommended output JSON structure.
+3. Any fields you recommend excluding from the MVP.
+4. Any unresolved decisions that must be finalized before implementation.
+
+Keep the schemas internally consistent and suitable for later implementation using Python, Flask, Pydantic, and Pytest.
