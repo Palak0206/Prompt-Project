@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyFlow | AI Study Planner</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="logo-icon">✦</span>
+                <span>StudyFlow</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <span>⌂</span> Study Planner
+                </a>
+
+                <a href="#" class="nav-item">
+                    <span>▦</span> My Timetables
+                </a>
+
+                <a href="#" class="nav-item">
+                    <span>◷</span> History
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="sidebar-note">
+                    <span>✧</span>
+                    <p>Small steps every day lead to big results.</p>
+                </div>
+            </div>
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <header class="topbar">
+                <div>
+                    <p class="greeting">YOUR PERSONAL STUDY ASSISTANT</p>
+                    <h2>Let's plan your success.</h2>
+                </div>
+
+                <div class="profile">
+                    <div class="profile-avatar">S</div>
+                    <span>Student</span>
+                </div>
+            </header>
+
+
+            <!-- Input Section -->
+            <section class="welcome-section">
+
+                <div class="welcome-text">
+                    <span class="tag">✦ AI POWERED STUDY PLANNER</span>
+
+                    <h1>Make your study time<br>
+                        <span>count.</span>
+                    </h1>
+
+                    <p>
+                        Tell us about your exams, subjects and study goals.
+                        We'll turn your requirements into a personalised
+                        study timetable.
+                    </p>
+                </div>
+
+
+                <div class="query-card">
+
+                    <div class="card-heading">
+                        <div>
+                            <h3>What are we preparing for?</h3>
+                            <p>Describe your study requirements below.</p>
+                        </div>
+                        <span class="sparkle">✧</span>
+                    </div>
+
+                    <form id="study-form">
+
+                        <textarea
+                            id="student-query"
+                            placeholder="Example: I have Mathematics on December 5 and DBMS on December 8. I can study 4 hours daily. Mathematics is difficult for me and I've completed 40% of my preparation..."
+                            required
+                        ></textarea>
+
+                        <div class="input-footer">
+                            <span>✦ Be as detailed or as brief as you like.</span>
+
+                            <button type="submit" id="generate-btn">
+                                Generate my plan
+                                <span>→</span>
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+
+            <!-- Example Prompts -->
+            <section class="examples-section">
+                <h3>Not sure what to write?</h3>
+                <p>Here are some examples to get you started.</p>
+
+                <div class="example-grid">
+
+                    <div class="example-card">
+                        <span>📚</span>
+                        <h4>Multiple exams</h4>
+                        <p>Plan for multiple subjects with different exam dates.</p>
+                    </div>
+
+                    <div class="example-card">
+                        <span>⏳</span>
+                        <h4>Limited time</h4>
+                        <p>Create a plan around your available daily hours.</p>
+                    </div>
+
+                    <div class="example-card">
+                        <span>🎯</span>
+                        <h4>Weak subjects</h4>
+                        <p>Focus more on subjects that need extra preparation.</p>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- Loading / Error / Clarification / Timetable -->
+            <section id="result-section" class="result-section">
+
+                <div id="loading-state" class="hidden">
+                    <div class="loader"></div>
+                    <h3>Creating your study plan...</h3>
+                    <p>Our AI is organising your study sessions.</p>
+                </div>
+
+                <div id="error-message" class="error-message hidden"></div>
+
+                <div id="clarification-section" class="hidden"></div>
+
+                <div id="timetable-section" class="hidden"></div>
+
+            </section>
+
+            <footer>
+                Made for better learning, one day at a time.
+            </footer>
+
+        </main>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

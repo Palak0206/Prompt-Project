@@ -3,6 +3,7 @@ import os
 
 from dotenv import load_dotenv
 from groq import Groq
+from app.models.groq_schema import TIMETABLE_GROQ_SCHEMA
 
 
 # Load environment variables from .env
@@ -37,7 +38,14 @@ def generate_timetable_response(prompt: str) -> str:
                 "content": prompt
             }
         ],
-        response_format={"type": "json_object"},
+        response_format={
+        "type": "json_schema",
+        "json_schema": {
+        "name": "timetable_output",
+        "strict": True,
+        "schema": TIMETABLE_GROQ_SCHEMA
+        }
+            },
         temperature=0.2,
         max_completion_tokens=4000
     )

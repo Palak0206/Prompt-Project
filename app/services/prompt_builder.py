@@ -61,8 +61,32 @@ PLANNING RULES:
 
 12. Revision and mock tests are useful planning
     options, but do not force them for every subject.
+13. Avoid scheduling the same topic for initial learning
+    multiple times unless the student needs additional
+    explanation or practice.
+
+14. Once a topic has been introduced, prefer practice,
+    revision, or mock tests for subsequent sessions.
+
+15. Distribute study sessions across subjects according
+    to their exam dates, difficulty, and preparation level.
+
+16. Avoid repeatedly scheduling generic tasks when
+    specific supplied topics are available.
 
 OUTPUT REQUIREMENTS:
+IMPORTANT ARRAY RULES:
+
+- The "days" field must be an array of day objects.
+- Every element inside "days" must be a JSON object.
+- Never insert empty strings, null values, or other
+  primitive values inside the "days" array.
+- Every day object must contain exactly "date" and "items".
+- Every element inside "items" must be a valid session
+  object or break object.
+- Empty days must use "items": [], not an empty string.
+- Do not use blank strings as separators between objects.
+
 
 Return ONLY valid JSON.
 

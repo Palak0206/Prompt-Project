@@ -1,22 +1,39 @@
 
+
 import json
 
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template
 from pydantic import ValidationError
 
 from app.models.input_models import StudentInput
 from app.services.prompt_builder import build_timetable_prompt
+from app.services.timetable_service import (
+    generate_timetable,
+    TimetableGenerationError
+)
 
 
 api = Blueprint("api", __name__)
 
+
+# ==============================
+# 1. Homepage
+# ==============================
+
+@api.route("/")
+def home():
+    return render_template("index.html")
+
+
+# ==============================
+# 2. Validate Student Input
+# ==============================
 
 @api.post("/api/validate-input")
 def validate_input():
 
     data = request.get_json(silent=True)
 
-    # Check whether the request contains JSON
     if not isinstance(data, dict):
         return jsonify({
             "error": "Request body must contain a valid JSON object."
@@ -35,6 +52,12 @@ def validate_input():
         "message": "Student input is valid.",
         "student": student.model_dump(mode="json")
     }), 200
+
+
+# ==============================
+# 3. Preview Generated Prompt
+# ==============================
+
 @api.post("/api/preview-prompt")
 def preview_prompt():
 
@@ -59,4 +82,53 @@ def preview_prompt():
     return jsonify({
         "message": "Prompt generated successfully.",
         "prompt": prompt
+    }), 200
+
+
+# ==============================
+# 4. Generate Timetable
+# ==============================
+
+@api.post("/api/generate-timetable")
+def generate_timetable_route():
+
+    data = request.get_json(silent=True)
+
+    # Check incoming JSON
+    if not isinstance(data, dict):
+        return jsonify({
+            "error": "Request body must contain a valid JSON object."
+        }), 400
+
+    # Validate student input
+    try:
+        student = StudentInput.model_validate(data)
+
+    except ValidationError as exc:
+        return jsonify({
+            "error": "Input validation failed.",
+            "details": json.loads(exc.json(include_url=False))
+        }), 400
+
+    # Generate and validate timetable
+    try:
+        timetable = generate_timetable(student)
+
+    except TimetableGenerationError as exc:
+        return jsonify({
+            "error": "Timetable generation failed.",
+            "details": str(exc)
+        }), 422
+
+    except Exception:
+        api.logger.exception("Unexpected timetable generation error")
+
+        return jsonify({
+            "error": "An unexpected error occurred while generating the timetable."
+        }), 502
+
+    # Return validated timetable
+    return jsonify({
+        "message": "Timetable generated successfully.",
+        "timetable": timetable.model_dump(mode="json")
     }), 200
