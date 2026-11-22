@@ -523,3 +523,100 @@ footer {
         margin-top: 40px;
     }
 }
+
+/* Generated Timetable */
+
+.timetable-heading {
+    margin-bottom: 24px;
+}
+
+.timetable-heading h2 {
+    font-size: 26px;
+    margin-bottom: 8px;
+}
+
+.timetable-days {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.day-card {
+    background: white;
+    border: 1px solid #e8e3f0;
+    border-radius: 14px;
+    padding: 22px;
+}
+
+.day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 12px;
+}
+
+.day-header h3 {
+    font-size: 17px;
+}
+
+.day-header span,
+.duration {
+    color: #7656b5;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.schedule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.study-item {
+    background: #f7f4fc;
+}
+
+.break-item {
+    background: #f1f7f4;
+}
+
+.schedule-item h4 {
+    margin: 7px 0;
+}
+
+.schedule-item p {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+}
+
+.session-type {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #7656b5;
+    font-weight: 700;
+}
+
+.topic-list {
+    font-size: 12px !important;
+}
+
+.empty-day {
+    color: #888;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .day-card {
+        padding: 14px;
+    }
+
+    .schedule-item {
+        padding: 12px;
+    }
+}

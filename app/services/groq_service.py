@@ -1,27 +1,20 @@
-
 import os
 
 from dotenv import load_dotenv
 from groq import Groq
-from app.models.groq_schema import TIMETABLE_GROQ_SCHEMA
 
-
-# Load environment variables from .env
 load_dotenv()
 
 
 def generate_timetable_response(prompt: str) -> str:
-
     api_key = os.getenv("GROQ_API_KEY")
     model = os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")
 
     if not api_key:
         raise ValueError("GROQ_API_KEY is missing from .env")
 
-    # Initialize Groq client
     client = Groq(api_key=api_key)
 
-    # Send prompt to Groq
     response = client.chat.completions.create(
         model=model,
         messages=[
@@ -29,8 +22,9 @@ def generate_timetable_response(prompt: str) -> str:
                 "role": "system",
                 "content": (
                     "You are an expert academic study planner. "
-                    "Follow the user's instructions carefully "
-                    "and return valid JSON only."
+                    "Generate a realistic and practical study timetable. "
+                    "Return only a valid JSON object. "
+                    "Do not include Markdown, code fences, or explanations."
                 )
             },
             {
@@ -38,22 +32,25 @@ def generate_timetable_response(prompt: str) -> str:
                 "content": prompt
             }
         ],
-        response_format={
-        "type": "json_schema",
-        "json_schema": {
-        "name": "timetable_output",
-        "strict": True,
-        "schema": TIMETABLE_GROQ_SCHEMA
-        }
-            },
+        reasoning_effort="low",
+        include_reasoning=False,
         temperature=0.2,
-        max_completion_tokens=4000
+        max_completion_tokens=8000
     )
 
-    # Extract generated text
-    generated_text = response.choices[0].message.content
+    choice = response.choices[0]
+    message = choice.message
+
+    print("Groq finish reason:", choice.finish_reason)
+    print("Groq usage:", response.usage)
+
+    generated_text = message.content
 
     if not generated_text:
-        raise ValueError("Groq returned an empty response.")
+        raise ValueError(
+            f"Groq returned empty content. "
+            f"Finish reason: {choice.finish_reason}. "
+            f"Reasoning available: {bool(message.reasoning)}"
+        )
 
-    return generated_text
+    return generated_text.strip()
